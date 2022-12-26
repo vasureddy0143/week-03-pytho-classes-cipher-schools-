@@ -1,0 +1,87 @@
+#inheritance
+     
+
+class A:
+  def __init__(self, x):
+    print("A init executed")
+class B(A):
+  def __init__(self):
+    print("B init executed")
+
+abc =B()
+     
+     B init executed
+     #MRO(method resolution order)
+     
+
+class A:
+  pass
+
+class B(A):
+  pass
+
+class C(B):
+  pass
+
+class D(A):
+  x = 10
+
+class E(C, D):
+  pass
+
+e = E()
+print(e.x)
+
+     
+10
+
+E.mro()
+     
+[__main__.E, __main__.C, __main__.B, __main__.D, __main__.A, object]
+#Iteration protocol
+for any object to be an iterable,it should have 2 dundles
+
+__iter__
+__next__
+
+     
+
+a = range(5)
+it = a.__iter__()
+it
+     
+
+a = [1, 2, 3, 4]
+iter(a)
+class myrange:
+  def __init__(self, n):
+    self.n = n
+
+  def __iter__(self):
+    return myrange_iterator(self)
+
+class myrange_iterator:
+  def __init__(self, myrange):
+    self.myrange = myrange
+    self.i = 0
+
+  def __next__(self):
+    ret = self.i
+    self.i += 1
+
+    if ret >= self.myrange.n:
+      raise StopIteration
+
+    return ret
+
+
+for i in myrange(5):
+  print(i)
+
+     
+0
+1
+2
+3
+4
+     
